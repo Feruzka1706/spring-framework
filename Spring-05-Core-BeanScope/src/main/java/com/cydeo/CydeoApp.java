@@ -16,8 +16,19 @@ public class CydeoApp {
 
         ApplicationContext context = new AnnotationConfigApplicationContext(ProjectConfig.class);
 
+        /*
         CommentService commentService = context.getBean(CommentService.class);
         commentService.publishComment(comment);
+
+        CommentService cs1 = context.getBean(CommentService.class);
+
+        CommentService cs2 = context.getBean(CommentService.class);
+
+        System.out.println(cs1); //memory location of object
+        System.out.println(cs2); //memory location of object
+
+         */
+
     }
 
 }
