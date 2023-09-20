@@ -16,7 +16,7 @@
 
 <!--Concatenation-->
 <h2 th:text="${'Welcome ' + students.get(0).firstName + ' '+students.get(0).lastName}"></h2>
-
+<!--<h2 th:text=" 'Welcome ' + ${students.get(0).firstName} +' ' +${students.get(0).lastName}"></h2>-->
 <!--Link-->
 <a th:href="@{https://cydeo.com}">Cydeo Home Page</a>
 <br>

@@ -21,10 +21,8 @@ public class StudentController {
     }
 
     @GetMapping("/welcome")
-    public String studentWelcome(@RequestParam("id") String student, Model model){
+    public String studentWelcome( Model model){
 
-        //Displaying request parameter data to the browser
-        model.addAttribute("id",student);
         model.addAttribute("students", DataGenerator.createStudents());
         return "student/welcome";
     }
