@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+
+<div align="center">
+  <body>
+
+  <h3 th:text="${mentor.firstName}"></h3>
+  <h3 th:text="${mentor.lastName}"></h3>
+  <h3 th:text="${mentor.email}"></h3>
+  <h3 th:text="${mentor.gender}"></h3>
+  <h3 th:text="${mentor.graduated}"></h3>
+  <h3 th:text="${mentor.company}"></h3>
+
+
+  <div th:replace="/fragments/index :: footer-menu"></div>
+
+  </body>
+</div>
+</html>
