@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Spring10OrmTableCreationApplication {
+public class SpringOrmApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Spring10OrmTableCreationApplication.class, args);
+        SpringApplication.run(SpringOrmApplication.class, args);
     }
 
 }
