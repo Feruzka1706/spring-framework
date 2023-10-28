@@ -1,8 +1,10 @@
 package com.cydeo.bootstrap;
 
 import com.cydeo.enums.Status;
+import com.cydeo.model.Merchant;
 import com.cydeo.model.Payment;
 import com.cydeo.model.PaymentDetail;
+import com.cydeo.repository.MerchantRepository;
 import com.cydeo.repository.PaymentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -16,6 +18,7 @@ import java.time.LocalDate;
 public class DataGenerator implements CommandLineRunner {
 
     PaymentRepository paymentRepository;
+    MerchantRepository merchantRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -30,8 +33,14 @@ public class DataGenerator implements CommandLineRunner {
 
         payment2.setPaymentDetail(paymentDetail2);
 
+        Merchant merchant1 = new Merchant("AmazonSubMerchant","M123",new BigDecimal("0.25"),new BigDecimal("3.25"),5);
+        payment1.setMerchantId(merchant1); //One merchant can do multiple payments
+        payment2.setMerchantId(merchant1);
+
+        merchantRepository.save(merchant1);
         paymentRepository.save(payment1);
         paymentRepository.save(payment2);
+
     }
 
 

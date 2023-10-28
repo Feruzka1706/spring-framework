@@ -31,6 +31,10 @@ public class Payment {
     @JoinColumn(name = "payment_detail")
     private PaymentDetail paymentDetail;
 
+    @ManyToOne
+    @JoinColumn(name = "merchantId")
+    private Merchant merchantId;
+
     public Payment(LocalDate createdDate, BigDecimal amount, Status status) {
         this.createdDate = createdDate;
         this.amount = amount;
