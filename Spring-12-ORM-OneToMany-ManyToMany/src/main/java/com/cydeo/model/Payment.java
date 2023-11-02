@@ -35,6 +35,8 @@ public class Payment {
     @JoinColumn(name = "merchantId")
     private Merchant merchantId;
 
+    @ManyToOne
+    private Customer customer;
     public Payment(LocalDate createdDate, BigDecimal amount, Status status) {
         this.createdDate = createdDate;
         this.amount = amount;
