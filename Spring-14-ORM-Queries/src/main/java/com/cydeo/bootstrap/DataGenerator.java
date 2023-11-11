@@ -1,20 +1,24 @@
 package com.cydeo.bootstrap;
 
 
+import com.cydeo.repository.CourseRepository;
 import com.cydeo.repository.DepartmentRepository;
 import com.cydeo.repository.EmployeeRepository;
 import com.cydeo.repository.RegionRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @AllArgsConstructor
+@Transactional
 public class DataGenerator implements CommandLineRunner {
 
     private final RegionRepository regionRepository;
     private final DepartmentRepository departmentRepository;
     private final EmployeeRepository employeeRepository;
+    private final CourseRepository courseRepository;
     @Override
     public void run(String... args) throws Exception {
 
@@ -46,5 +50,19 @@ public class DataGenerator implements CommandLineRunner {
         System.out.println("getEmployeeSalary: "+employeeRepository.getEmployeeSalary());
         System.out.println("------------------Employee END--------------------------");
 
+
+        System.out.println("------------------COURSES START--------------------------");
+        courseRepository.findCourseByCategory("Spring").forEach(System.out::println);
+        System.out.println("***********************************");
+        courseRepository.findByCategoryOrderByName("Spring").forEach(System.out::println);
+        System.out.println("***********************************");
+        System.out.println("existsByName: " +courseRepository.existsByName("JavaScript for all"));
+
+        System.out.println("countByCategory: "+courseRepository.countByCategory("Spring"));
+        courseRepository.findByNameStartsWith("Scalable").forEach(System.out::println);
+        System.out.println("***********************************");
+        courseRepository.streamByCategory("Spring").forEach(System.out::println);
+
+        System.out.println("------------------COURSES END--------------------------");
     }
 }
