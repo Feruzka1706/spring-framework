@@ -1,13 +1,16 @@
 package com.cydeo.entity;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import java.math.BigDecimal;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Location extends BaseEntity{
 
@@ -23,6 +26,7 @@ public class Location extends BaseEntity{
 
     //we don't need Constructor because we are using Data.sql to load data to use
     //Constructor need when we are getting data from user and assigning to object
+    /**
     public Location(String name, BigDecimal latitude,
                     BigDecimal longitude, String postalCode,
                     String country, String state,
@@ -35,6 +39,22 @@ public class Location extends BaseEntity{
         this.state = state;
         this.city = city;
         this.address = address;
+    }
+     */
+
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "name='" + name + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", postalCode='" + postalCode + '\'' +
+                ", country='" + country + '\'' +
+                ", state='" + state + '\'' +
+                ", city='" + city + '\'' +
+                ", address='" + address + '\'' +
+                '}';
     }
 
 }
