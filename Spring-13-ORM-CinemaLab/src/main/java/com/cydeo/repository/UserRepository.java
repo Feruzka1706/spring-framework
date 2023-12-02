@@ -18,15 +18,15 @@ public interface UserRepository extends JpaRepository<UserAccount, Long> {
     Optional<UserAccount> findByUsername(String username);
 
     //Write a derived query to list all users that contain a specific name?
-    List<UserAccount> findAllByAccountDetails_NameContaining(String name);
+    List<UserAccount> findAllByUserAccount_NameContaining(String name);
 
 
     //Write a derived query to list all users that contain a specific name in the ignore case mode?
-    List<UserAccount> findAllByAccountDetails_NameContainingIgnoreCase(String name);
+    List<UserAccount> findAllByUserAccount_NameContainingIgnoreCase(String name);
 
 
     //Write a derived query to list all users with an age greater than a specified age?
-    List<UserAccount> findAllByAccountDetails_AgeGreaterThan(int age);
+    List<UserAccount> findAllByUserAccount_AgeGreaterThan(int age);
 
     // ------------------- JPQL QUERIES ------------------- //
 
@@ -40,7 +40,8 @@ public interface UserRepository extends JpaRepository<UserAccount, Long> {
     Optional<UserAccount> getUserByUsername(String username);
 
     //Write a JPQL query that returns all users?
-    List<UserAccount> findAll();
+    @Query("Select user from UserAccount user")
+    List<UserAccount> findAllUsers();
 
     // ------------------- Native QUERIES ------------------- //
 
@@ -58,6 +59,7 @@ public interface UserRepository extends JpaRepository<UserAccount, Long> {
     @Query(value = "select * from user_account ua join account_details ad " +
             "on ua.account_details_id = ad.id where ad.age between ?1 and ?2",nativeQuery = true)
     List<UserAccount> getAllUsersByAgeOfRange(Integer startAge, Integer endAge);
+
 
     //Write a native query to read a user by email?
     @Query(value = "select * from user_account where email = ?1", nativeQuery = true)
