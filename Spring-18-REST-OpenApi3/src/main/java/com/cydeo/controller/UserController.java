@@ -2,6 +2,11 @@ package com.cydeo.controller;
 
 import com.cydeo.entity.User;
 import com.cydeo.repository.UserRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
+@Tag(name = "User", description = "User CRUD Operations")
 public class UserController {
 
     private final UserRepository userRepository;
@@ -19,6 +25,15 @@ public class UserController {
     }
 
     @GetMapping("/users")
+    @Operation(summary = "Read all users")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved users (OK)",
+                    content ={@Content(mediaType = "application/json")} ),
+            //if we don't give content explicitly Spring Open api will create Content response object
+            //with default object response example which we don't want in our case
+            @ApiResponse(responseCode = "400", description = "Bad Request",content = @Content),
+            @ApiResponse(responseCode = "404", description = "Resource not found", content = @Content)
+    })
     public List<User> readAllUsers() {
         return userRepository.findAll();
     }
