@@ -1,6 +1,8 @@
 package com.cydeo.aspect;
 
+import com.cydeo.annotation.Loggable;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -113,6 +115,28 @@ public class LoggingAspect {
     }
     */
 
+    @Pointcut("@annotation(com.cydeo.annotation.Loggable)")
+    private void anyLoggableMethodOperation(){
+
+    }
+
+
+    @Around("anyLoggableMethodOperation()")
+    public Object anyLoggableMethodOperationAdvice(ProceedingJoinPoint proceedingJoinPoint){
+        logger.info("Before () -> Method : {} - Parameters: {}",
+                proceedingJoinPoint.getSignature().toShortString(), proceedingJoinPoint.getArgs());
+        Object results=null;
+        try {
+            results = proceedingJoinPoint.proceed();
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
+
+        logger.info("After - > Method: {} - Results: {}",
+                proceedingJoinPoint.getSignature().toShortString(), results.toString());
+
+        return  results;
+    }
 
 
 }
