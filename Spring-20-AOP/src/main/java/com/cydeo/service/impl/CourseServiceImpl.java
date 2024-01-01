@@ -69,7 +69,7 @@ public class CourseServiceImpl implements CourseService {
         courseRepository.deleteAll();
     }
 
-    @Loggable
+    //@Loggable
     @Override
     public void deleteCourseById(Long courseId) {
         courseRepository.deleteById(courseId);
